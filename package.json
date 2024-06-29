@@ -1,0 +1,13 @@
+{
+  "name": "preact-signals-talk",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.3.2",
+    "prettier-plugin-slidev": "^1.0.5"
+  }
+}
