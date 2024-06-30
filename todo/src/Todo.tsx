@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { randText, randBoolean } from "@ngneat/falso";
 
 type Todo = {
   id: string;
@@ -32,6 +33,14 @@ type Todo = {
   completed: boolean;
 };
 type TodoDraft = Pick<Todo, "title" | "description">;
+type TodoFilter = "all" | "completed" | "pending";
+
+const generateTodo = (): Todo => ({
+  id: crypto.randomUUID(),
+  completed: randBoolean(),
+  description: randText(),
+  title: randText(),
+});
 
 export function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -39,14 +48,15 @@ export function TodoList() {
     title: "",
     description: "",
   });
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState<TodoFilter>("all");
   const addTodo = () => {
-    if (newTodo.title.trim()) {
+    const title = newTodo.title.trim();
+    if (title) {
       setTodos((prevTodos) => [
         ...prevTodos,
         {
           id: crypto.randomUUID(),
-          title: newTodo.title,
+          title: title,
           description: newTodo.description,
           completed: false,
         },
@@ -54,6 +64,11 @@ export function TodoList() {
       setNewTodo({ title: "", description: "" });
     }
   };
+  const add1kTodos = () =>
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      ...Array.from({ length: 1_000 }, () => generateTodo()),
+    ]);
   const toggleTodoStatus = (id: string) => {
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
@@ -95,6 +110,7 @@ export function TodoList() {
             }
           />
           <Button onClick={addTodo}>Add</Button>
+          <Button onClick={add1kTodos}>Add 1k todos</Button>
         </div>
         <div className="flex items-center gap-4">
           <DropdownMenu>
