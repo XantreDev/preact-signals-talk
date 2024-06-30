@@ -1,9 +1,6 @@
 ---
 # You can also start simply with 'default'
 theme: default
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
 # some information about your slides (markdown enabled)
 title: Welcome to Slidev
 info: |
@@ -146,7 +143,7 @@ React is inefficient by default.
 
 ## How do production app render tree look like?
 
-![alt text](image.png){class='mx-auto max-h-[420px]'}
+![alt text](/image.png){class='mx-auto max-h-[420px]'}
 
 ---
 class: "relative"
@@ -384,3 +381,4 @@ class: text-center
 # Let's explore how to use preact signals in practice
 
 ---
+
