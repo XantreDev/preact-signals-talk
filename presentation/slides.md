@@ -299,11 +299,88 @@ layout: iframe
 url: https://stackblitz.com/edit/vitejs-vite-zuyyux?embed=1&file=src%2FApp.jsx
 ---
 
-<!-- Now we just updating components that really needs to be updated -->
+<!--
+Now we just updating components that really needs to be updated
+-->
 
 ---
 
+# Preact signals API
 
+<v-switch>
+
+<template #1>
+
+```ts twoslash
+import { signal } from "@preact/signals-core";
+
+const counter = signal(10);
+```
+
+</template>
+
+<template #2>
+
+```ts twoslash
+import { signal } from "@preact/signals-core";
+
+const counter = signal(10);
+
+type Simplify<T extends Record<any, any>> = {
+  [TKey in keyof T]: T[TKey];
+};
+type Sig = Simplify<typeof counter>;
+```
+
+</template>
+
+<template #3>
+
+```ts twoslash
+import { signal, computed } from "@preact/signals-core";
+
+const counter = signal(10);
+const doubled = computed(() => counter.value * 2);
+```
+
+</template>
+
+<template #4>
+
+```ts {monaco-run} {height: 'auto'}
+import { signal, computed, effect } from "@preact/signals-core";
+
+const counter = signal(10);
+const doubled = computed(() => counter.value * 2);
+
+effect(() => {
+  console.log(doubled.value);
+});
+```
+
+</template>
+
+</v-switch>
+
+<!--
+Let's explore api of signals
+
+Check signal type.
+Check computed signal type
+
+Writing part:
+- show how effects reacts on signal change
+- how to dispose effect
+- show example with conditional execution of effect (add logCounter signal)
+- show effect dispose function
+- show infinite loop caused by effect
+-->
 
 ---
+layout: quote
+class: text-center
+---
 
+# Let's explore how to use preact signals in practice
+
+---
