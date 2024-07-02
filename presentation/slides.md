@@ -2,12 +2,12 @@
 # You can also start simply with 'default'
 theme: default
 # some information about your slides (markdown enabled)
-title: Welcome to Slidev
+title: Using Signals in React
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
+  ## How often have you wished for something better than useState and useEffect?
+   Do we deserve more predictable and performant tools? 
+   I've pondered this a lot. In this talk, we'll explore 
+   how our React applications can benefit from State of Art UI state management primitive - signals
 # apply unocss classes to the current slide
 class: text-center
 # https://sli.dev/custom/highlighters.html
@@ -19,9 +19,14 @@ drawings:
 transition: slide-left
 # enable MDC Syntax: https://sli.dev/guide/syntax#mdc-syntax
 mdc: true
+layout: quote
 ---
 
-# Improving react statemanagement (preact-signals)
+# Using Signals in React
+
+<!--
+How often have you wished for something better than useState and useEffect? Do we deserve more predictable and performant tools? I've pondered this a lot. In this talk, we'll explore how our React applications can benefit from State of Art UI state management primitive - signals
+-->
 
 ---
 
