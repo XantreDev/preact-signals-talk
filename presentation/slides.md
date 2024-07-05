@@ -387,3 +387,77 @@ class: text-center
 
 ---
 
+## Signals downsides
+
+<v-clicks>
+
+- complexity
+- debugging
+- mixing `useState` with signals
+
+</v-clicks>
+
+<!--
+gives you an opportunity to add unnecessary complexity to the app. You can make simple things harder
+click
+It can be tricky to debug reactivity, because side effect can throw when you do not expect it to
+click
+If you want to create computed/memos/effect - you need to convert all values from state to signals or vice versa
+click
+Every technology should be used with a purpose...
+-->
+
+---
+layout: iframe
+url: https://stackblitz.com/edit/vitejs-vite-unqckw?embed=1&file=src%2FApp.tsx
+---
+
+---
+layout: iframe
+url: https://preact-signals.netlify.app/
+---
+
+---
+
+<!-- [TODO] add linkedin in with info -->
+
+# Thank you for attention
+
+<div class="grid grid-cols-[1fr_1fr_1fr] gap-4">
+
+<div class="flex flex-col items-start gap-2 [&>p]:contents">
+<a href='https://t.me/javastrippt'>Telegram (javastrippt)</a>
+<img alt='alt text' src='/tg-qr-code.svg' />
+</div>
+
+<div class="flex flex-col items-start gap-2">
+<a href='https://github.com/XantreDev'>
+GitHub (XantreDev)
+</a>
+<img alt="alt text" src='/github-qr-code.svg' />
+</div>
+
+<div class="flex flex-col items-start gap-2">
+<a href='https://x.com/Xantre_'>
+Twitter/X (Xantre_)
+</a>
+<img alt="alt text" src="/twitter-qr-code.svg" />
+</div>
+
+</div>
+
+<!--
+Спасибо
+
+Канал
+
+Github
+
+Twitter
+
+Презентация - в open source
+
+Спасибо саше
+
+Отвечаем на вопросы
+-->
