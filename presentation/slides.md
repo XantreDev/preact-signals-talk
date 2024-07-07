@@ -38,18 +38,35 @@ How often have you wished for something better than useState and useEffect? Do w
 - professional React hater
 - worked in different JS codebases
 
+<!--
+- contributions, own OSS
+- sluggish apps like Teams, Slack
+- more than 2 years experience. interpreted - complex apps
+- unperformant, needs fine tuning
+- I knew different UI frameworks approaches. This why I creating this talk
+-->
+
 ---
 
 # Talk structure
 
-- Discuss problems with React statemanagement
+- Discuss React statemanagement problems
   - Hard to write any logic
   - Performance problems
-- What is possible solution? Maybe, Reactive systems? (Solid.js)
+- Modern approaches
 - Adopting reactivity in React (preact-signals)
 - Rewriting app with preact-signals
 - preact signals drawbacks
 - QA
+
+<!--
+- slide text
+- Solid.js, Vue.js, Qwik.js, Angular
+- how to use it in React
+- workshop rewriting app with preact-signals
+- cons
+- i will answer any questions
+-->
 
 ---
 layout: two-cols-header
@@ -60,9 +77,27 @@ layoutClass: gap-x-3
 
 ::left::
 
-### Logic on useEffect
+### Unstable references
 
-```ts{*|6|13|*}
+```ts{*}
+const musicPlayer = useMusicPlayer();
+const { togglePlayback } = musicPlayer;
+useEffect(() => {
+  togglePlayback({
+    playbackId: "intro",
+    playbackSource: require("./../../../assets/audio/intro.mp3"),
+  });
+  return () => {
+    togglePlayback(undefined);
+  };
+}, [togglePlayback]);
+```
+
+::right::
+
+### Logic on useEffect {v-click}
+
+```ts{hide|*|6-7|16-17|*} {at="+0"}
 useEffect(() => {
   if (!connected) {
     return;
@@ -85,34 +120,28 @@ useEffect(() => {
 }, [connected, products]);
 ```
 
-::right::
-
-### Unstable references {v-click}
-
-```ts{hide|*}{at:'+0'}
-const musicPlayer = useMusicPlayer();
-const { togglePlayback } = musicPlayer;
-useEffect(() => {
-  togglePlayback({
-    playbackId: "intro",
-    playbackSource: require("./../../../assets/audio/intro.mp3"),
-  });
-  return () => {
-    togglePlayback(undefined);
-  };
-}, [togglePlayback]);
-```
-
 <!--
-If anyone tried to express complex logic, using react primitives - he knew that it really hard. React team made a lot of traps for us.
-It relies on current value in clojure
+Let's start with my favorite hook - useFootGun
+
+Logic - is really hard.
+
+Unstable references
+
+Ask about what's wrong with the code?
+
+Stale clojures
+
+It feels unfamiliar for people from other UI frameworks
+
+ 
+React team made a lot of traps for us.
 -->
 
 ---
 
 ## React performance
 
-```jsx{*|17-26|22|1-6|24|7-15|*}
+```jsx{*|17-26|22|1-6|7-15|*}
 const Counter = ({ count, onIncrement }) => (
   <div>
     Count: {count}
@@ -142,6 +171,10 @@ function App() {
 
 <!--
 React is inefficient by default.
+- unnecessary computations
+- huge components trees
+
+How our render trees looks like?
 -->
 
 ---
@@ -149,6 +182,13 @@ React is inefficient by default.
 ## How do production app render tree look like?
 
 ![alt text](/image.png){class='mx-auto max-h-[420px]'}
+
+<!--
+- shallow component tree
+- deep component tree
+
+top component rerender -> forces subsequent components to rerender
+-->
 
 ---
 class: "relative"
@@ -213,7 +253,9 @@ function App() {
 ````
 
 <!--
-Solid js uses reactivity
+- reactive system
+- know exactly what need to be reexecuted
+- huge component will be reexecuted only once
 -->
 
 ---
@@ -223,9 +265,14 @@ Solid js uses reactivity
 ### Of course not{v-click class='h-full flex flex-col gap-4 items-center justify-center'}
 
 <!--
-You must have a good reason for new rewrite, but you can start new projects 
-with solid.js. 
-Actually technologies do not matter much
+Read.
+
+No. 
+- ecosystem
+- cost - no sense
+- you can solve performance problems in React
+
+You must have a good reason for new rewrite, but you can start new projects with solid.js.
 -->
 
 ---
@@ -236,8 +283,10 @@ class: "w-full h-full flex items-center justify-center text-center"
 
 <!--
 You can build poor product with great technologies and create great ones with Javascript on backend.
+
 [TODO]: add some examples on slide
-But we can fix our pains by adopting best patterns to React
+
+Pains in react - new approaches
 -->
 
 ---
@@ -368,7 +417,12 @@ effect(() => {
 Let's explore api of signals
 
 Check signal type.
+
+value, peek - subscribtions of parent scope to signal
+
 Check computed signal type
+
+effects
 
 Writing part:
 - show how effects reacts on signal change
@@ -398,14 +452,27 @@ class: text-center
 </v-clicks>
 
 <!--
+Seems like signals is cool and we should use it everywhere
+
+[click]
 gives you an opportunity to add unnecessary complexity to the app. You can make simple things harder
-click
+
+[click]
+
 It can be tricky to debug reactivity, because side effect can throw when you do not expect it to
-click
+[click]
 If you want to create computed/memos/effect - you need to convert all values from state to signals or vice versa
-click
+
+
 Every technology should be used with a purpose...
 -->
+---
+layout: quote
+class: text-center
+---
+
+## One more thing
+
 
 ---
 layout: iframe
