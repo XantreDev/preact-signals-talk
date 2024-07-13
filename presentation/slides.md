@@ -25,7 +25,11 @@ layout: quote
 # Using Signals in React
 
 <!--
-How often have you wished for something better than useState and useEffect? Do we deserve more predictable and performant tools? I've pondered this a lot. In this talk, we'll explore how our React applications can benefit from State of Art UI state management primitive - signals
+Yo guys. I hope you had good time of doing programming this day. But maybe you spend this time better
+
+more productive react 
+
+preact signals
 -->
 
 ---
@@ -121,6 +125,7 @@ useEffect(() => {
 ```
 
 <!--
+I've actually made fun of you. Writing logic in react is decent
 Let's start with my favorite hook - useFootGun
 
 Logic - is really hard.
@@ -253,6 +258,8 @@ function App() {
 ````
 
 <!--
+Are there something better?
+
 - reactive system
 - know exactly what need to be reexecuted
 - huge component will be reexecuted only once
@@ -466,13 +473,13 @@ If you want to create computed/memos/effect - you need to convert all values fro
 
 Every technology should be used with a purpose...
 -->
+
 ---
 layout: quote
 class: text-center
 ---
 
 ## One more thing
-
 
 ---
 layout: iframe
