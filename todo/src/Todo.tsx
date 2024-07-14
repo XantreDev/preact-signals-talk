@@ -25,6 +25,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { randText, randBoolean } from "@ngneat/falso";
+import { useComputed, useSignal } from "@preact/signals-react";
 
 type Todo = {
   id: string;
@@ -44,24 +45,24 @@ const generateTodo = (): Todo => ({
 
 export function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [newTodo, setNewTodo] = useState<TodoDraft>({
+  const newTodo = useSignal<TodoDraft>({
     title: "",
     description: "",
   });
   const [filter, setFilter] = useState<TodoFilter>("all");
   const addTodo = () => {
-    const title = newTodo.title.trim();
+    const title = newTodo.value.title.trim();
     if (title) {
       setTodos((prevTodos) => [
         ...prevTodos,
         {
           id: crypto.randomUUID(),
           title: title,
-          description: newTodo.description,
+          description: newTodo.value.description,
           completed: false,
         },
       ]);
-      setNewTodo({ title: "", description: "" });
+      newTodo.value = { title: "", description: "" };
     }
   };
   const add1kTodos = () =>
@@ -86,6 +87,8 @@ export function TodoList() {
         return todos;
     }
   }, [todos, filter]);
+  
+  console.log('todo list rerender')
   return (
     <div className="flex flex-col h-screen bg-background text-foreground">
       <header className="bg-primary text-primary-foreground py-4 px-6">
@@ -96,17 +99,22 @@ export function TodoList() {
           <Input
             type="text"
             placeholder="Add a new todo"
-            value={newTodo.title}
-            onChange={(e) => setNewTodo({ ...newTodo, title: e.target.value })}
+            value={useComputed(() => newTodo.value.title)}
+            onChange={(e) =>
+              (newTodo.value = { ...newTodo.value, title: e.target.value })
+            }
             maxLength={200}
           />
           <Input
             type="text"
             placeholder="Description"
-            value={newTodo.description}
+            value={useComputed(() => newTodo.value.description)}
             maxLength={500}
             onChange={(e) =>
-              setNewTodo({ ...newTodo, description: e.target.value })
+              (newTodo.value = {
+                ...newTodo.value,
+                description: e.target.value,
+              })
             }
           />
           <Button onClick={addTodo}>Add</Button>
