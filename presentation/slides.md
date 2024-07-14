@@ -510,28 +510,7 @@ url: https://preact-signals.netlify.app/
 
 # Thank you for attention
 
-<div class="grid grid-cols-[1fr_1fr_1fr] gap-4">
-
-<div class="flex flex-col items-start gap-2 [&>p]:contents">
-<a href='https://t.me/javastrippt'>Telegram (javastrippt)</a>
-<img alt='alt text' src='/tg-qr-code.svg' />
-</div>
-
-<div class="flex flex-col items-start gap-2">
-<a href='https://github.com/XantreDev'>
-GitHub (XantreDev)
-</a>
-<img alt="alt text" src='/github-qr-code.svg' />
-</div>
-
-<div class="flex flex-col items-start gap-2">
-<a href='https://x.com/Xantre_'>
-Twitter/X (Xantre_)
-</a>
-<img alt="alt text" src="/twitter-qr-code.svg" />
-</div>
-
-</div>
+<Logos :logos="['telegram', 'github', 'linkedin']" />
 
 <!--
 Спасибо
