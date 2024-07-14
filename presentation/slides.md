@@ -24,6 +24,8 @@ layout: quote
 
 # Using Signals in React
 
+<!-- [TODO]: add info about fact that signals are more predictable to write logic -->
+
 <!--
 Yo guys. I hope you had good time of doing programming this day. But maybe you spend this time better
 
@@ -42,11 +44,15 @@ preact signals
 - professional React hater
 - worked in different JS codebases
 
+<div class='absolute right-[18%] top-[20%] rounded-full overflow-hidden'>
+<img src='/self-photo.jpg' class='object-cover w-40 scale-125 aspect-square' />
+</div>
+
 <!--
 - contributions, own OSS
 - sluggish apps like Teams, Slack
 - more than 2 years experience. interpreted - complex apps
-- unperformant, needs fine tuning
+- not performant, needs fine tuning
 - I knew different UI frameworks approaches. This why I creating this talk
 -->
 
@@ -175,9 +181,11 @@ function App() {
 ```
 
 <!--
-React is inefficient by default.
-- unnecessary computations
-- huge components trees
+React is inefficient by default
+
+Facts: 
+- top render forces to reexecute any of it descendants 
+- nested components tree - slow
 
 How our render trees looks like?
 -->
@@ -192,7 +200,10 @@ How our render trees looks like?
 - shallow component tree
 - deep component tree
 
-top component rerender -> forces subsequent components to rerender
+What can make our trees more nested: 
+- HOCs (styled)
+- Providers
+- UI libraries
 -->
 
 ---
@@ -258,11 +269,15 @@ function App() {
 ````
 
 <!--
-Are there something better?
+Are there something better? Components is cheap
+Difference:
+- components is executes once
+- no VDOM
 
+How:
 - reactive system
 - know exactly what need to be reexecuted
-- huge component will be reexecuted only once
+- huge component will be executed only once
 -->
 
 ---
@@ -283,15 +298,13 @@ You must have a good reason for new rewrite, but you can start new projects with
 -->
 
 ---
-class: "w-full h-full flex items-center justify-center text-center"
----
 
 ## Technologies do not matter much
 
+![alt text](/image-2.png){v-click class='max-h-[38vh]'}
+
 <!--
 You can build poor product with great technologies and create great ones with Javascript on backend.
-
-[TODO]: add some examples on slide
 
 Pains in react - new approaches
 -->
