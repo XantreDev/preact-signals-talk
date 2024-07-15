@@ -180,37 +180,33 @@ function App() {
 }
 ```
 
+![alt text](/image.png){v-click class='absolute top-1/2 left-1/2 translate-[-50%] max-h-[420px]'}
+
 <!--
 React is inefficient by default
 
 Facts: 
 - top render forces to reexecute any of it descendants 
+- rerenders of top of the tree is slow
 - nested components tree - slow
 
 How our render trees looks like?
--->
-
----
-
-## How do production app render tree look like?
-
-![alt text](/image.png){class='mx-auto max-h-[420px]'}
-
-<!--
 - shallow component tree
 - deep component tree
 
 What can make our trees more nested: 
 - HOCs (styled)
-- Providers
+- Context Providers
 - UI libraries
+
+Result = we forced to nest components to improve performance
 -->
 
 ---
 class: "relative"
 ---
 
-## Solid.js - with JSX, but fast
+## Can we make our components hierarchy cheap?
 
 [Test it out](https://playground.solidjs.com/anonymous/0eca54da-e148-424f-bdd0-640bcfce8223){class='absolute right-18 bottom-5 z-10'}
 
@@ -269,15 +265,17 @@ function App() {
 ````
 
 <!--
-Are there something better? Components is cheap
+Can we make our components hierarchy cheap? Can we abstract when we want to?
+
+Yes - there is Solid.js approach.
 Difference:
 - components is executes once
 - no VDOM
 
 How:
-- reactive system
 - know exactly what need to be reexecuted
-- huge component will be executed only once
+
+It's build on top of reactive system
 -->
 
 ---
@@ -287,96 +285,51 @@ How:
 ### Of course not{v-click class='h-full flex flex-col gap-4 items-center justify-center'}
 
 <!--
-Read.
-
+Reactive system - sound cool. Should we rewrite our projects with Solid.js?
 No. 
+
+You can build poor product with great technologies and create great ones with React
+
 - ecosystem
-- cost - no sense
+- cost - no sense. 
 - you can solve performance problems in React
 
-You must have a good reason for new rewrite, but you can start new projects with solid.js.
+
+You must have a good reason for new rewrite, but you can start new projects with solid.js or adopt it's approaches
 -->
 
 ---
+class: 'flex flex-col h-full'
+---
 
-## Technologies do not matter much
+## Reactive primitives
 
-![alt text](/image-2.png){v-click class='max-h-[38vh]'}
+Signal is a pub sub
+
+
+
+<a class='mt-auto' href="https://www.youtube.com/live/whKwjZ6KA0Y?si=g99EAFI1MAdztnhz" v-click>Reactivity Unchained • Ryan Carniato</a>
 
 <!--
-You can build poor product with great technologies and create great ones with Javascript on backend.
+Solid.js is build around essential primitive - signal
 
-Pains in react - new approaches
+Signals is a wrapper around some value that allows use to subscribe to the value on read and execute deps on write
+This simple primitive now is popular 
+- Kotlin - signals can be emulated with RxKotlin
+- Swift - https://github.com/unixzii/swift-signal
+- Flutter - most successful https://github.com/rodydavis/signals.dart
+- qt - has something that might look like, but it's different
+- Rust - https://github.com/leptos-rs/leptos
+- Web - Angular, Solid, Svelte, Qwik, Preact
+
+We will not talk about how it works under the hood. Amazing talk from Ryan Carniato
+
+We will play with it in practical way. Let's explore reactivity system that can be applied to react
 -->
 
 ---
 
-## Can we adopt the same patterns in React?
-
-````md magic-move
-```tsx{none|*}
-const Counter = ({ count, onIncrement }) => (
-  <div>
-    Count: {count}
-    <button onClick={onIncrement}>Increment</button>
-  </div>
-);
-const HugeComponentTree = () => {
-  let res = 0;
-  const target = 10_000_000 + Math.random() * 10_000_000;
-  for (let i = 0; i < target; i++) res += Math.random();
-  return res;
-};
-
-function App() {
-  const [counter, increment] = React.useReducer((count) => count + 1, 0);
-  return (
-    <>
-      <Counter count={counter} onIncrement={increment} />
-      <HugeComponentTree />
-    </>
-  );
-}
-```
-
-```tsx
-const Counter = ({ count, onIncrement }) => (
-  <div>
-    Count: {count}
-    <button onClick={onIncrement}>Increment</button>
-  </div>
-);
-const HugeComponentTree = () => {
-  let res = 0;
-  const target = 10_000_000 + Math.random() * 10_000_000;
-  for (let i = 0; i < target; i++) res += Math.random();
-  return res;
-};
-
-function App() {
-  const [counter, increment] = [useSignal(0), () => counter.value++];
-  return (
-    <>
-      <Counter count={counter} onIncrement={increment} />
-      <HugeComponentTree />
-    </>
-  );
-}
-```
-````
-
----
-layout: iframe
-url: https://stackblitz.com/edit/vitejs-vite-zuyyux?embed=1&file=src%2FApp.jsx
----
-
-<!--
-Now we just updating components that really needs to be updated
--->
-
----
-
-# Preact signals API
+## Preact signals API
 
 <v-switch>
 
@@ -434,6 +387,7 @@ effect(() => {
 </v-switch>
 
 <!--
+Reactivity implementation is independent from framework
 Let's explore api of signals
 
 Check signal type.
@@ -445,6 +399,7 @@ Check computed signal type
 effects
 
 Writing part:
+- show that effects is executed immediately after run
 - show how effects reacts on signal change
 - how to dispose effect
 - show example with conditional execution of effect (add logCounter signal)
