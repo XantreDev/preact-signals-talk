@@ -299,14 +299,30 @@ You must have a good reason for new rewrite, but you can start new projects with
 -->
 
 ---
-class: 'flex flex-col h-full'
+class: "flex flex-col h-full"
 ---
 
 ## Reactive primitives
 
 Signal is a pub sub
 
-
+<ul v-click class='flex [&>*]:w-10 items-center [&_*]:object-cover [&>*]:overflow-hidden [&>*]:list-none'>
+<li>
+<img src='/image-1.png' />
+</li>
+<li>
+<img src='/solid-logo.png' />
+</li>
+<li>
+<img src='/image-4.png' />
+</li>
+<li>
+<img src='/preact-icon.svg' />
+</li>
+<li>
+<img src='/flutter-icon.png' />
+</li>
+</ul>
 
 <a class='mt-auto' href="https://www.youtube.com/live/whKwjZ6KA0Y?si=g99EAFI1MAdztnhz" v-click>Reactivity Unchained • Ryan Carniato</a>
 
@@ -322,9 +338,7 @@ This simple primitive now is popular
 - Rust - https://github.com/leptos-rs/leptos
 - Web - Angular, Solid, Svelte, Qwik, Preact
 
-We will not talk about how it works under the hood. Amazing talk from Ryan Carniato
-
-We will play with it in practical way. Let's explore reactivity system that can be applied to react
+We will talk about practical way of using signals. If you want to know more how it works under the hood. Amazing talk from Ryan Carniato
 -->
 
 ---
@@ -387,8 +401,8 @@ effect(() => {
 </v-switch>
 
 <!--
-Reactivity implementation is independent from framework
-Let's explore api of signals
+Reactivity implementation is independent from frameworks in most cases
+Let's explore api of one of the fastest implementation of Signals
 
 Check signal type.
 
@@ -401,12 +415,36 @@ effects
 Writing part:
 - show that effects is executed immediately after run
 - show how effects reacts on signal change
+- show how much times computed are executed
+- ask about what computed + effect + console log will output to console
 - how to dispose effect
 - show example with conditional execution of effect (add logCounter signal)
 - show effect dispose function
 - show infinite loop caused by effect
 -->
 
+---
+
+## React integration
+
+```tsx
+const Component = () => {
+  // starting tracking here
+  const tracking = useSignals()
+  try {
+    // your component code
+    return <div>{sig.value}</div>
+  } finally {
+    tracking.finalize()
+  }
+}
+```
+
+
+---
+layout: iframe
+url: https://preact-signals.netlify.app/
+---
 ---
 layout: quote
 class: text-center
@@ -443,20 +481,26 @@ Every technology should be used with a purpose...
 -->
 
 ---
+
 layout: quote
 class: text-center
+
 ---
 
 ## One more thing
 
 ---
+
 layout: iframe
 url: https://stackblitz.com/edit/vitejs-vite-unqckw?embed=1&file=src%2FApp.tsx
+
 ---
 
 ---
+
 layout: iframe
 url: https://preact-signals.netlify.app/
+
 ---
 
 ---
