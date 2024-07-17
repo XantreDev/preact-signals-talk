@@ -107,7 +107,7 @@ useEffect(() => {
 
 ### Logic on useEffect {v-click}
 
-```ts{hide|*|6-7|16-17|*} {at="+0"}
+```ts{hide|*} {at="+0"}
 useEffect(() => {
   if (!connected) {
     return;
@@ -152,7 +152,7 @@ React team made a lot of traps for us.
 
 ## React performance
 
-```jsx{*|17-26|22|1-6|7-15|*}
+```jsx{*|16-25|7-14|*}
 const Counter = ({ count, onIncrement }) => (
   <div>
     Count: {count}
@@ -302,11 +302,13 @@ You must have a good reason for new rewrite, but you can start new projects with
 class: "flex flex-col h-full"
 ---
 
-## Reactive primitives
+## Reactive primitives {class='mb-4'}
 
-Signal is a pub sub
+### _Signal is just a wrapper around value_
 
-<ul v-click class='flex [&>*]:w-10 items-center [&_*]:object-cover [&>*]:overflow-hidden [&>*]:list-none'>
+![alt text](/image-5.png){class='h-40' v-click}
+
+<ul v-click class='flex justify-end mt-auto [&>*]:w-10 items-center [&_*]:object-cover [&>*]:overflow-hidden [&>*]:list-none'>
 <li>
 <img src='/image-1.png' />
 </li>
@@ -323,8 +325,6 @@ Signal is a pub sub
 <img src='/flutter-icon.png' />
 </li>
 </ul>
-
-<a class='mt-auto' href="https://www.youtube.com/live/whKwjZ6KA0Y?si=g99EAFI1MAdztnhz" v-click>Reactivity Unchained • Ryan Carniato</a>
 
 <!--
 Solid.js is build around essential primitive - signal
@@ -383,9 +383,9 @@ const doubled = computed(() => counter.value * 2);
 
 </template>
 
-<template #4>
+<template #4-6>
 
-```ts {monaco-run} {height: 'auto'}
+```ts {monaco-run} {height: 'auto',autorun: false}
 import { signal, computed, effect } from "@preact/signals-core";
 
 const counter = signal(10);
@@ -399,6 +399,8 @@ effect(() => {
 </template>
 
 </v-switch>
+
+<a class='mt-auto' href="https://www.youtube.com/live/whKwjZ6KA0Y?si=g99EAFI1MAdztnhz" v-after>Reactivity Unchained • Ryan Carniato</a>
 
 <!--
 Reactivity implementation is independent from frameworks in most cases
@@ -427,24 +429,32 @@ Writing part:
 
 ## React integration
 
+````md magic-move
+```tsx
+const Component = () => {
+  return <div>{sig.value}</div>;
+};
+```
+
 ```tsx
 const Component = () => {
   // starting tracking here
-  const tracking = useSignals()
+  const tracking = useSignals();
   try {
     // your component code
-    return <div>{sig.value}</div>
+    return <div>{sig.value}</div>;
   } finally {
-    tracking.finalize()
+    tracking.finalize();
   }
-}
+};
 ```
-
+````
 
 ---
 layout: iframe
-url: https://preact-signals.netlify.app/
+url: https://preact-signals.netlify.app/?transformerConfig=N4Igxg9gtgDhB2BTeAXAziAXCgTgV0QBoQoBDMHCLAM1IBs0iTzKB5GFASyk4C9SuCDJloNEAXyA&code=JYWwDg9gTgLgBAbzgZ2AcwHYEMA2cC%2BcAZlBCHAOQACYUAplgMYwC0qmuyA9MlkXS3pMYFAFCjGEDMniSArhhh0ocALwp02HAAoADAEpxRBc2BS4AQTBht%2BxKLhx6MOVAxxtDx3AA8AIzkYGHMvbzgpAGEcYEYAa1UEWzUAPjh5RWUAOgA3XDk6AGoC-FC4ZNLHAEkMRnoQOkUALkR0pSgcvLoSsJ8uAKCpcsdDEqA#/
 ---
+
 ---
 layout: quote
 class: text-center
@@ -481,26 +491,20 @@ Every technology should be used with a purpose...
 -->
 
 ---
-
 layout: quote
 class: text-center
-
 ---
 
 ## One more thing
 
 ---
-
 layout: iframe
 url: https://stackblitz.com/edit/vitejs-vite-unqckw?embed=1&file=src%2FApp.tsx
-
 ---
 
 ---
-
 layout: iframe
-url: https://preact-signals.netlify.app/
-
+url: https://preact-signals.netlify.app/?transformerConfig=N4Igxg9gtgDhB2BTeAXAziAXAMwIYBs1EAaEKXMAJwixUoFcSyLqB5GFASyk4C9cuCDJjqMAvkA&code=JYWwDg9gTgLgBAbzgEgM4wIYwKZwL5wBmUEIcA5AAJhTYYDGMAtKsAOYB2GANqgPQBXGMF58QDEuQBQU7tng4AHvAC8KdFmwAKcuQCUMwgI6NgEDnACCYMFr2IpcOLRgCoFrY6dwAPABNgADcAPi9vX2AOMCE4MPC4QJ4BbBUEJRgCOPDzAEkooVStbHsVYLgtdLg1bAA6TCg2eRrE7mS9TPi4PlDOnzBgtOxlPB8%2BfrjRgJCvAzwpIA
 ---
 
 ---
