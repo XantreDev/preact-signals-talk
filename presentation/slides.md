@@ -38,22 +38,24 @@ preact signals
 
 # About me
 
-- preact-signals enthusiast
 - I like performant applications
 - professional Javascript hater
 - professional React hater
 - worked in different JS codebases
+- preact-signals enthusiast
 
 <div class='absolute right-[18%] top-[20%] rounded-full overflow-hidden'>
 <img src='/self-photo.jpg' class='object-cover w-40 scale-125 aspect-square' />
 </div>
 
 <!--
-- contributions, own OSS
+Why do i want to talk about it?
+
 - sluggish apps like Teams, Slack
 - more than 2 years experience. interpreted - complex apps
 - not performant, needs fine tuning
 - I knew different UI frameworks approaches. This why I creating this talk
+- contributions, own OSS
 -->
 
 ---
@@ -132,17 +134,18 @@ useEffect(() => {
 
 <!--
 I've actually made fun of you. Writing logic in react is decent
-Let's start with my favorite hook - useFootGun
+Let's start with my favorite hook - useEffect or useFootGun
 
-Logic - is really hard.
+Logic - is really hard. Unexpected things
 
 Unstable references
-
-Ask about what's wrong with the code?
 
 Stale clojures
 
 It feels unfamiliar for people from other UI frameworks
+
+Ask about what's wrong with the code?
+
 
  
 React team made a lot of traps for us.
@@ -288,7 +291,7 @@ It's build on top of reactive system
 Reactive system - sound cool. Should we rewrite our projects with Solid.js?
 No. 
 
-You can build poor product with great technologies and create great ones with React
+ok tech - good products
 
 - ecosystem
 - cost - no sense. 
@@ -329,16 +332,18 @@ class: "flex flex-col h-full"
 <!--
 Solid.js is build around essential primitive - signal
 
-Signals is a wrapper around some value that allows use to subscribe to the value on read and execute deps on write
-This simple primitive now is popular 
-- Kotlin - signals can be emulated with RxKotlin
+Signals is a wrapper around value
+
+It's like matershka, you know
+
+Subscribe. Changed = effects
+
+- Web - Solid, Angular, Svelte, Qwik, Preact
 - Swift - https://github.com/unixzii/swift-signal
 - Flutter - most successful https://github.com/rodydavis/signals.dart
 - qt - has something that might look like, but it's different
 - Rust - https://github.com/leptos-rs/leptos
-- Web - Angular, Solid, Svelte, Qwik, Preact
 
-We will talk about practical way of using signals. If you want to know more how it works under the hood. Amazing talk from Ryan Carniato
 -->
 
 ---
@@ -423,6 +428,10 @@ Writing part:
 - show example with conditional execution of effect (add logCounter signal)
 - show effect dispose function
 - show infinite loop caused by effect
+
+If you want to know more how it works under the hood. Amazing talk from Ryan Carniato
+
+Let's talk about practical part
 -->
 
 ---
@@ -449,6 +458,14 @@ const Component = () => {
 };
 ```
 ````
+
+<!--
+How integrate signals into React?
+
+There were a lot of tries from preact team to integrate it with react
+ 
+How it different from other statemanagers?
+-->
 
 ---
 layout: iframe

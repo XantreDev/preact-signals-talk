@@ -26,8 +26,8 @@ const props = defineProps<{
       </li>
 
       <li v-if="item === 'linkedin'" class="flex flex-col items-start gap-2">
-        <a href="https://x.com/Xantre_"> Linkedin (xantre) </a>
-        <img alt="alt text" src="./twitter-qr-code.svg" />
+        <a href="https://www.linkedin.com/in/xantre/"> Linkedin (xantre) </a>
+        <img alt="alt text" src="./linkedin-qr-code.svg" />
       </li>
     </template>
   </ul>
