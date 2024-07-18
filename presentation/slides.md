@@ -52,10 +52,10 @@ preact signals
 Why do i want to talk about it?
 
 - sluggish apps like Teams, Slack
-- more than 2 years experience. interpreted - complex apps
-- not performant, needs fine tuning
+- slide text. more than 2 years experience. interpreted - complex apps
+- slide text. slow (do not overexplain)
 - I knew different UI frameworks approaches. This why I creating this talk
-- contributions, own OSS
+- result = signals, contributions and own OSS
 -->
 
 ---
@@ -73,7 +73,7 @@ Why do i want to talk about it?
 
 <!--
 - slide text
-- Solid.js, Vue.js, Qwik.js, Angular
+- modern approaches - Solid.js, Vue.js, Qwik.js, Angular
 - how to use it in React
 - workshop rewriting app with preact-signals
 - cons
@@ -140,15 +140,15 @@ Logic - is really hard. Unexpected things
 
 Unstable references
 
+
+without eslint - a mess. with eslint - a mess 
+
+
 Stale clojures
 
 It feels unfamiliar for people from other UI frameworks
 
 Ask about what's wrong with the code?
-
-
- 
-React team made a lot of traps for us.
 -->
 
 ---
@@ -190,19 +190,26 @@ React is inefficient by default
 
 Facts: 
 - top render forces to reexecute any of it descendants 
+[click]
+[click]
+[click]
 - rerenders of top of the tree is slow
 - nested components tree - slow
 
-How our render trees looks like?
+Is it a real problem? 
+[click]
+
+
 - shallow component tree
 - deep component tree
 
-What can make our trees more nested: 
+What makes situation worse?
+- wrapper components 
 - HOCs (styled)
 - Context Providers
 - UI libraries
 
-Result = we forced to nest components to improve performance
+Result = we forced to nest our components in specific way to improve performance
 -->
 
 ---
@@ -272,7 +279,7 @@ Can we make our components hierarchy cheap? Can we abstract when we want to?
 
 Yes - there is Solid.js approach.
 Difference:
-- components is executes once
+- components executed once
 - no VDOM
 
 How:
@@ -294,8 +301,8 @@ No.
 ok tech - good products
 
 - ecosystem
-- cost - no sense. 
 - you can solve performance problems in React
+- cost - no sense. 
 
 
 You must have a good reason for new rewrite, but you can start new projects with solid.js or adopt it's approaches
@@ -330,7 +337,7 @@ class: "flex flex-col h-full"
 </ul>
 
 <!--
-Solid.js is build around essential primitive - signal
+Solid.js is build around essential primitive - signal. But what is a signals?
 
 Signals is a wrapper around value
 
@@ -338,12 +345,13 @@ It's like matershka, you know
 
 Subscribe. Changed = effects
 
+Where is it used?
+
 - Web - Solid, Angular, Svelte, Qwik, Preact
 - Swift - https://github.com/unixzii/swift-signal
 - Flutter - most successful https://github.com/rodydavis/signals.dart
 - qt - has something that might look like, but it's different
 - Rust - https://github.com/leptos-rs/leptos
-
 -->
 
 ---
@@ -408,14 +416,13 @@ effect(() => {
 <a class='mt-auto' href="https://www.youtube.com/live/whKwjZ6KA0Y?si=g99EAFI1MAdztnhz" v-after>Reactivity Unchained • Ryan Carniato</a>
 
 <!--
-Reactivity implementation is independent from frameworks in most cases
 Let's explore api of one of the fastest implementation of Signals
 
 Check signal type.
 
 value, peek - subscribtions of parent scope to signal
 
-Check computed signal type
+computeds - allows to derive some state from other state
 
 effects
 
@@ -425,6 +432,8 @@ Writing part:
 - show how much times computed are executed
 - ask about what computed + effect + console log will output to console
 - how to dispose effect
+
+brialliant thing - dynamic deps
 - show example with conditional execution of effect (add logCounter signal)
 - show effect dispose function
 - show infinite loop caused by effect
@@ -463,7 +472,12 @@ const Component = () => {
 How integrate signals into React?
 
 There were a lot of tries from preact team to integrate it with react
- 
+
+Babel plugin 
+
+- detect component - uses jsx and named from capital
+- check is it uses signals
+
 How it different from other statemanagers?
 -->
 
@@ -495,7 +509,7 @@ class: text-center
 Seems like signals is cool and we should use it everywhere
 
 [click]
-gives you an opportunity to add unnecessary complexity to the app. You can make simple things harder
+unnecessary complexity. unfamiliarity
 
 [click]
 
